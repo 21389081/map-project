@@ -6,22 +6,34 @@
     --orange-color: #df8229;
     --dark-background: #9c7c55;
     --text-color: #5f4227;
-    --secend-background: #f9e4c8;
+    --second-background: #f9e4c8;
+    --slider-background: #f5c88ea4;
 }
 
 @theme inline {
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
     background-color: var(--main-background);
+}
+
+@layer components {
+    /* 通用的 range slider 樣式 */
+    .slider {
+        @apply appearance-none w-full h-2 rounded-full bg-[var(--slider-background)];
+    }
+    /* WebKit 軌道 */
+    .slider::-webkit-slider-runnable-track {
+        @apply h-2 bg-[var(--orange-color)];
+    }
+    /* Firefox 軌道已走過部分 */
+    .slider::-moz-range-progress {
+        @apply bg-[var(--orange-color)];
+    }
+    /* 拖點（thumb） */
+    .slider::-webkit-slider-thumb,
+    .slider::-moz-range-thumb {
+        @apply appearance-none w-4 h-4 bg-(--orange-color) border-2 border-[var(--border-color)]
+           rounded-full shadow cursor-pointer;
+    }
 }
